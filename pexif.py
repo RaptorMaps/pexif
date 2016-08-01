@@ -1230,3 +1230,12 @@ class JpegFile:
         gps.GPSLongitude = [Rational(deg, 1),
                             Rational(min, 1),
                             Rational(sec, JpegFile.SEC_DEN)]
+
+    def set_alt(self, alt):
+        """Set the GPSAltitude
+        Input is in meters and becomes an integer"""
+        if self.mode != "rw":
+            raise RWError
+
+        gps = self.exif.primary.GPS
+        gps.GPSAltitude = [Rational(int(alt),1)]
